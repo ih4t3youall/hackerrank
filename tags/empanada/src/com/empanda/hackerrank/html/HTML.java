@@ -9,14 +9,17 @@ import java.util.ArrayList;
 
 public class HTML {
 
-    public static void main(String [] args){
-        String fileName= "/home/empanada/Personal/Projects/hackerrank/tags/empanada2/src/com/empanda/hackerrank/html/input.html";
+    public HTML (){
+        String fileName= "/home/empanada/Personal/Projects/hackerrank/tags/empanada/src/com/empanda/hackerrank/html/input.html";
         try (BufferedReader br = Files.newBufferedReader(Paths.get(fileName))) {
            tagExtractor(br);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void main(String [] args){
+      new HTML();
     }
 
     private static void tagExtractor(BufferedReader br) throws IOException{
@@ -24,8 +27,7 @@ public class HTML {
         List<MessageTag> messages = new ArrayList<>();
         List<String> tags = new ArrayList<>();
         while ((line = br.readLine()) != null) {
-            messages.addAll(contabilizarTags(line, tags));
-        }
+            messages.addAll(contabilizarTags(line, tags)); }
         System.out.println(messages);
     }
 
