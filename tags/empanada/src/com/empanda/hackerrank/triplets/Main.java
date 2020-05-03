@@ -24,21 +24,24 @@ public class Main {
        }
 
        public void next(){
-           a = 1;
-           b = 1;
+           a = 0;
+           b = 0;
            c++;
-           if (isValid()) return;
-           while (b < c ) {
-               while (a < b ) {
-                   a++;
-                   if (isValid()) return;
-                   if (isSumOverMax()) break;
-               }
+           while (b < c && notFoundYet()) {
                b++;
-               a = 1;
-               if (isValid()) return;
-               if (isSumOverMax()) break;
+               while (a < b && notFoundYet()) {
+                   a++;
+               }
+               if (isInvalid()) a = 1;
            }
+       }
+
+       public boolean notFoundYet(){
+           return isSumUnderMax() && isInvalid();
+       }
+
+       public boolean isInvalid(){
+           return !isValid();
        }
 
        public boolean isValid(){
@@ -56,6 +59,7 @@ public class Main {
            return a+b+c > max;
        }
 
+       public boolean isSumUnderMax() { return !isSumOverMax(); }
         public boolean hasReachedMax() {
             return a+b+c == max;
         }
