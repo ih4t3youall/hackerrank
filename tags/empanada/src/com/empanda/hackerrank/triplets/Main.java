@@ -3,13 +3,11 @@ package com.empanda.hackerrank.triplets;
 public class Main {
     public static void main(String[] args) {
         Triplet t = new Triplet(1, 1, 1);
-        while (!t.isOverMaxValue()) {
-           if (t.findNextTriplet()){
-               if (t.hasReachedMaxValue())
-                   t.print();
-           }
-           t.c++;
-           t.b = 1;
+        t.max = 1000;
+        while (!t.isSumOverMax()) {
+            t.next();
+            if (t.hasReachedMax())
+                t.print();
         }
     }
 
@@ -17,24 +15,29 @@ public class Main {
        public int a;
        public int b;
        public int c;
-       final int maxNumber = 1000;
+       public int max;
+
        public Triplet(int a, int b, int c){
            this.a = a;
            this.b = b;
            this.c = c;
        }
-       public boolean findNextTriplet(){
+
+       public boolean next(){
+           a = 1;
+           b = 1;
+           c++;
            if (isValid()) return true;
            while (b < c ) {
                while (a < b ) {
                    a++;
                    if (isValid()) return true;
-                   if (isOverMaxValue()) break;
+                   if (isSumOverMax()) break;
                }
                b++;
                a = 1;
                if (isValid()) return true;
-               if (isOverMaxValue()) break;
+               if (isSumOverMax()) break;
            }
            return false;
        }
@@ -46,20 +49,16 @@ public class Main {
        return tmpA + tmpB == tmpC;
        }
 
-       public int sum(){
-          return a+ b + c;
-       }
-
        public void print(){
            System.out.println("La posta es : "+a+"^2 + "+b+"^2 ="+c+"^2");
        }
 
-       public boolean isOverMaxValue(){
-           return a+b+c > maxNumber;
+       public boolean isSumOverMax(){
+           return a+b+c > max;
        }
 
-        public boolean hasReachedMaxValue() {
-            return a+b+c == maxNumber;
+        public boolean hasReachedMax() {
+            return a+b+c == max;
         }
     }
 }
