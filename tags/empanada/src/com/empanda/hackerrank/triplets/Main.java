@@ -23,23 +23,22 @@ public class Main {
            this.c = c;
        }
 
-       public boolean next(){
+       public void next(){
            a = 1;
            b = 1;
            c++;
-           if (isValid()) return true;
+           if (isValid()) return;
            while (b < c ) {
                while (a < b ) {
                    a++;
-                   if (isValid()) return true;
+                   if (isValid()) return;
                    if (isSumOverMax()) break;
                }
                b++;
                a = 1;
-               if (isValid()) return true;
+               if (isValid()) return;
                if (isSumOverMax()) break;
            }
-           return false;
        }
 
        public boolean isValid(){
